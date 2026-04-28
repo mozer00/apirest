@@ -1,0 +1,9 @@
+apirest-backend/.env
+apirest-backend/vendor/
+apirest-backend/storage/logs/
+apirest-backend/storage/framework/cache/
+apirest-backend/storage/framework/sessions/
+apirest-backend/storage/framework/views/
+apirest-frontend/node_modules/
+apirest-frontend/dist/
+apirest-frontend/.env

@@ -1,0 +1,31 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", "Roboto";
+}
+
+body {
+  background: var(--color-a);
+}
+
+:root {
+  --color-a: #111111;
+  --color-b: #222222;
+  --color-c: #1a1a1a;
+  --color-d: #fafafa;
+  --color-e: #01fe87;
+  --color-f: #009952;
+  --color-g: #ccc;
+  --color-h: rgb(239, 82, 82);
+  --color-i: rgb(71, 71, 255);
+  --color-j: #333333;
+  --color-k: rgb(251, 214, 10);
+
+  --shadow: 0px 3px 6px var(--color-a);
+  --box-dark: rgba(0, 0, 0, 0.95);
+
+  --toast-error-b: rgb(151, 48, 0);
+  --toast-warning-b: rgb(169, 143, 1);
+  --toast-success-b: #016134;
+}
