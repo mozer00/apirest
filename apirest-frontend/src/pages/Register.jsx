@@ -3,12 +3,13 @@ import Input from "../components/common/Input";
 import Form from "../components/common/Form";
 import Navbar from "../components/layout/Navbar";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import api from "../services/api";
 import { toast } from "react-toastify";
 
 function Register() {
   const { userId } = useParams();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -53,6 +54,7 @@ function Register() {
       .then((response) => {
         toast.success("Cadastro alterado com sucesso!");
         setIsLoading(false);
+        navigate("/");
       })
       .catch((error) => {
         if (error.status === 422) {
@@ -145,7 +147,7 @@ function Register() {
                 pathname: "/",
               }}
             >
-              Ver listagem
+              Voltar
             </Link>
 
             {userId ? (

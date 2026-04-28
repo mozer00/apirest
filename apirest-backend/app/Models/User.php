@@ -33,9 +33,9 @@ class User extends Authenticatable
         ];
     }
     
-    protected static function booted(): void
-    {
-        static::created(fn() => Cache::forget('users_total'));
-        static::deleted(fn() => Cache::forget('users_total'));
-    }
+    // protected static function booted(): void
+    // {
+    //     static::created(fn() => Cache::forget('users_total'));
+    //     static::deleted(fn() => Cache::forget('users_total'));
+    // }
 }

@@ -6,17 +6,36 @@ import Loader from "../components/common/Loader";
 import api from "../services/api";
 import "./Home.css";
 
-function Home() {
-  const numUsersPerPage = 3;
+function Home() {  
   const [users, setUsers] = useState([]);
   const [totalUsers, setTotalUsers] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [perPage, setPerPage] = useState(10);
   const [isLoading, setIsLoading] = useState(false);
 
 
   useEffect(() => {
     loadUsers();
-  }, []);
+  }, [currentPage]);
+
+  const getPageNumbers = () => {
+    const delta = 1;
+    const pages = [];
+
+    pages.push(1);
+
+    const start = Math.max(2, currentPage - delta);
+    const end = Math.min(totalPages - 1, currentPage + delta);
+
+    if (start > 2) pages.push('...');
+    for (let i = start; i <= end; i++) pages.push(i);
+    if (end < totalPages - 1) pages.push('...');
+
+    if (totalPages > 1) pages.push(totalPages);
+
+    return pages;
+  };
 
   const loadUsers = async () => {
     setIsLoading(true);
@@ -24,13 +43,14 @@ function Home() {
     await api
       .get("/users", {
         params: {
-          current_page: currentPage,          
+          page: currentPage,          
         },
       })
       .then((response) => {
-        setUsers([...users, ...response.data.data]);
-        setCurrentPage(currentPage + 1);
-        setTotalUsers(response.data.infos.total_users);
+        setUsers(response.data.data);
+        setTotalUsers(response.data.meta.total);
+        setTotalPages(response.data.meta.last_page);
+        setPerPage(response.data.meta.per_page);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -38,23 +58,7 @@ function Home() {
       });
   };
 
-  useEffect(() => {
-    if (totalUsers !== users.length) {
-      fixCurrentPage();
-    }
-  }, [totalUsers]);
 
-  const fixCurrentPage = () => {
-    let maxNumPage = Math.ceil(totalUsers / numUsersPerPage);
-    
-    if (currentPage > maxNumPage) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
-  const loadMore = () => {
-    loadUsers();
-  };
 
   return (
     <div>
@@ -75,11 +79,9 @@ function Home() {
             </>
           ) : (
             <>
-              {users.length === 1 ? (
-                <span>1 Usuário</span>
-              ) : (
-                <span>{totalUsers} Usuários</span>
-              )}
+              <span>
+                Exibindo {users.length} de {totalUsers} - página {currentPage} de {totalPages}
+              </span>
 
               {users.map((user, index) => {
                 return (
@@ -94,15 +96,37 @@ function Home() {
                 );
               })}
 
-              {users.length < totalUsers && (
-                <>
-                  {isLoading ? (
-                    <Loader />
-                  ) : (
-                    <Button onClick={() => loadMore()}>Carregar mais</Button>
+              <div className="pagination_controls">
+                <Button
+                  className="btn_page"
+                  onClick={() => setCurrentPage((p) => p - 1)}
+                  disabled={currentPage === 1}
+                >
+                  &lt;
+                </Button>
+
+                <div className="pagination_numbers">
+                  {getPageNumbers().map((page, index) =>
+                    page === '...'
+                      ? <span key={index} className="pagination_ellipsis">...</span>
+                      : <button
+                          key={index}
+                          className={`btn_page_num ${page === currentPage ? 'active' : ''}`}
+                          onClick={() => setCurrentPage(page)}
+                        >
+                          {page}
+                        </button>
                   )}
-                </>
-              )}
+                </div>
+
+                <Button
+                  className="btn_page"
+                  onClick={() => setCurrentPage((p) => p + 1)}
+                  disabled={currentPage === totalPages}
+                >
+                  &gt;
+                </Button>
+              </div>
             </>
           )}
         </div>

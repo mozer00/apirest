@@ -7,6 +7,7 @@ const Button = ({
   onClick,
   tooltipId,
   tooltipContent,
+  disabled,
 }) => {
   return (
     <button
@@ -14,6 +15,7 @@ const Button = ({
       onClick={onClick}
       data-tooltip-id={tooltipId}
       data-tooltip-content={tooltipContent}
+      disabled={disabled}
     >
       {children}
 

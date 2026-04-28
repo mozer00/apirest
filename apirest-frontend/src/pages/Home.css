@@ -1,6 +1,46 @@
+div.pagination_controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+div.pagination_numbers {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+button.btn_page_num {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: var(--color-g);
+  font-size: 14px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+button.btn_page_num:hover {
+  border-color: var(--color-j);
+  color: var(--color-d);
+}
+
+button.btn_page_num.active {
+  border-color: var(--color-e);
+  color: var(--color-e);
+  font-weight: 500;
+}
+
+span.pagination_ellipsis {
+  color: var(--color-g);
+  padding: 0 4px;
+}
+
 div.feed_form > span {
   color: var(--color-g);
-  font-size: 16px;
+  font-size: 12px;
   /* float: right; */
   display: block;
   text-align: right;

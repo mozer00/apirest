@@ -43,6 +43,19 @@ button.rmv:hover {
   opacity: 0.85;
 }
 
+button.btn_page {
+  width: auto;
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: normal;
+  margin-top: 0;
+}
+
+button.btn_page:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
 /* button.load_more {
   background: transparent;
   color: var(--color-d);
