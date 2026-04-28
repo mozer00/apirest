@@ -63,14 +63,14 @@ function Home() {
       <div className="main_feed">
         <div className="feed_form">
           <h1>Listagem dos usuários</h1>
-          <p>Listagem de todos usuários cadastrados na aplicação.</p>
+          <p>Listagem de todos usuários cadastrados.</p>
 
           {users.length <= 0 ? (
             <>
               {isLoading ? (
                 <Loader />
               ) : (
-                <p>Ops! Nenhum usuário cadastrado até o momento!.</p>
+                <p>Ops! Nenhum usuário cadastrado até o momento!</p>
               )}
             </>
           ) : (
