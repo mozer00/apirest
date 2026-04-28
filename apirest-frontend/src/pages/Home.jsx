@@ -8,6 +8,7 @@ import "./Home.css";
 
 function Home() {
   const numUsersPerPage = 3;
+  const [users, setUsers] = useState([]);
   const [totalUsers, setTotalUsers] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
