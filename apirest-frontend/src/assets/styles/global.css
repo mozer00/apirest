@@ -1,5 +1,5 @@
 nav.menu {
-  padding: 30px 15px;
+  padding: 15px;
 }
 
 div.main_feed {
@@ -10,7 +10,8 @@ div.main_feed {
 }
 
 div.feed_form {
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
 }
 
 h1,
@@ -47,7 +48,7 @@ div.feed_form a:hover {
 
 @media (min-width: 990px) {
   nav.menu {
-    padding: 30px 300px;
+    padding: 20px 15px;
   }
 
   div.main_feed {
