@@ -7,3 +7,4 @@ apirest-backend/storage/framework/views/
 apirest-frontend/node_modules/
 apirest-frontend/dist/
 apirest-frontend/.env
+.github/

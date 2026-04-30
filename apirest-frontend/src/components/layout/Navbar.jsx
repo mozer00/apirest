@@ -1,12 +1,25 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import { useState } from "react";
+import api from "../../services/api";
 import "./Navbar.css";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const isLoginPage = pathname === "/login";
+
+  const handleLogout = async () => {
+    setIsOpen(false);
+    try {
+      await api.post("/logout");
+    } catch (e) {
+      //limpa o token de qualquer forma
+    }
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
 
   return (
     <nav className="menu">
@@ -27,6 +40,9 @@ function Navbar() {
               </li>
               <li>
                 <Link to="/cadastrar" onClick={() => setIsOpen(false)}>Cadastrar</Link>
+              </li>
+              <li>
+                <a href="#" onClick={(e) => { e.preventDefault(); handleLogout(); }}>Sair</a>
               </li>
             </ul>
           </>
